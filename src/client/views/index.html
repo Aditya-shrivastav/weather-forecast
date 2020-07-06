@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="UTF-8">
+  <title>Weather Journal</title>
+  <link href="https://fonts.googleapis.com/css?family=Oswald:400,600,700|Ranga:400,700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div id="container">
+      <header>
+        <h1>Travel anywhere</h1>
+      </header>
+      <div id = "app">
+        <div id = "contain">
+          <h2>Let's Plan a Trip</h2>
+          <!--Getting info from the user-->
+          <section id="info">
+            <input type="text" class="trip_info" name="current_place" placeholder="Where are you now...">
+            <input type="text" class="trip_info" id="destination" name="desired_place" placeholder="Where you want to go....">
+            <label class="date">Date of departure:-</label>
+            <input type="date" class="trip_info" id="date" name="date" placeholder="when you go..">
+            <input type="submit" id="submit" name="submit">
+          </section>
+        </div>
+      </div>
+      <div id="trip">
+        <section id="result">
+          <div id="photo"></div>
+          <div id="data">
+            <div id="place" style="background-color:white; border-radius:1vh"></div>
+            <div id="temp"></div>
+            <div id="days"></div>
+            <div id="detail"></div>
+            <div id="button"></div>
+        </div>
+        </section>
+    </div>
+    </div>
+    <script>
+      // Check that service workers are supported
+      if ('serviceWorker' in navigator) {
+          // Use the window load event to keep the page load performant
+          window.addEventListener('load', () => {
+              navigator.serviceWorker.register('/service-worker.js');
+          });
+      }
+  </script>
+  </body>
+</html>

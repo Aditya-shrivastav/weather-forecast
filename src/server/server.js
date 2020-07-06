@@ -1,5 +1,5 @@
 // Setup empty JS object to act as endpoint for all route
-const data = {};
+let data = {};
 // Express to run server and routes
 const express = require('express');
 // Start up an instance of app
@@ -14,28 +14,30 @@ app.use(bodyParser.json());
 const cors = require('cors')
 app.use(cors());
 // Initialize the main project folder
-app.use(express.static('website'));
+app.use(express.static('dist'));
 // Spin up the server
+
+// Initialize all route with a callback function
+app.get('/',function(req,res){
+    res.sendFile('dist/index.html')
+})
+
+// Post Route
+app.post('/add',addInfo)
+
+function addInfo(req,res){
+    data['city'] = req.body.city
+    data['min_temp'] = req.body.min_temp
+    data['max_temp'] = req.body.max_temp
+    data['days'] = req.body.days
+    data['date'] = req.body.date
+    data['description'] = req.body.description
+    res.send(data);
+}
+
 const port = 3000;
 const server = app.listen(port,listening);
 // Callback to debug
 function listening(){
     console.log(`running on localhost: ${port}`)
 }
-// Initialize all route with a callback function
-app.get('/all',recieveInfo);
-// Callback function to complete GET '/all'
-function recieveInfo(req,res){
-    res.send(data);
-}
-
-// Post Route
-app.post('/add',postInfo);
-
-function postInfo(req,res){
-    data['date'] = req.body.date;
-    data['temp'] = req.body.temp;
-    data['content'] = req.body.content;
-    res.send(data)
-}
-  
